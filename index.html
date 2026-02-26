@@ -678,7 +678,6 @@
                     <option value="规划中">规划中</option>
                     <option value="已投稿">已投稿</option>
                     <option value="审稿中">审稿中</option>
-					<option value="已接收">已接收</option>
                 </select>
                 
                 <button class="add-new-btn" id="addNewBtn">
@@ -772,7 +771,6 @@
                             <option value="撰写中">撰写中</option>
                             <option value="已投稿">已投稿</option>
                             <option value="审稿中">审稿中</option>
-							<option value="已接收">已接收</option>
                         </select>
                     </div>
                 </div>
@@ -818,7 +816,8 @@
             { name: "唐桂花", grade: "研三", title: "新能源汽车轴承套圈锻造过程流线演变与调控研究", journal: "中国机械工程", time: "2026-01", status: "撰写中", progress: 0.25 },
             { name: "何亚妮", grade: "研三", title: "Stabilizing γ/γ' phase interface for improving high-temperature creep resistance of Nickel-based Superalloys via a novel electromagnetic shocking treatment", journal: "Acta mater.", time: "2026-02", status: "撰写中", progress: 0.25 },
             { name: "宋正杰", grade: "研三", title: "Targeted effect and homogenized mechanism of microscopic residual stress of TC11 titanium alloys via electromagnetic shocking", journal: "Transactions of Nonferrous Metals Society of China", time: "2026-12", status: "已投稿", progress: 0.5 },
-            { name: "肖乐雨", grade: "研二", title: "Dissolution Mechanism and Prediction of Carbides in High-carbon Chromium Bearing Steel Subjected to Cold Rolling and Heat Treatment", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
+            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-01", status: "已投稿", progress: 0.5 },
+			{ name: "肖乐雨", grade: "研二", title: "Dissolution Mechanism and Prediction of Carbides in High-carbon Chromium Bearing Steel Subjected to Cold Rolling and Heat Treatment", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
             { name: "宋佳龙", grade: "研二", title: "Interface bonding mechanism of Ti-551 during electrically assisted hot compression bonding", journal: "Materials Science and Engineering: A", time: "2026-04", status: "撰写中", progress: 0.25 },
             { name: "易伟", grade: "研二", title: "High-quality interface bonding of 60NiTi and 100Cr6 heterogeneous materials achieved by combining laser cladding with electrically assisted", journal: "", time: "2026-04", status: "规划中", progress: 0 },
             { name: "刘傲宇", grade: "研二", title: "Enhanced Strength-Ductility Synergy in TC11 Titanium Alloy via Harmonic Heterostructure Induced by Rapid Heating Deformation", journal: "Materials Science and Engineering: A", time: "2026-07", status: "规划中", progress: 0 },
@@ -827,7 +826,6 @@
             { name: "周雪", grade: "研二", title: "Inhibiting hydrogen-induced stress corrosion cracking via Electromagnetic Shocking induced surface structure stabilization", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
             { name: "沈子扬", grade: "研二", title: "Ti551钛合金热变形行为和热加工图研究", journal: "钢铁钒钛", time: "2026-01", status: "已投稿", progress: 0.5 },
             { name: "谭美如", grade: "研一", title: "Improve the friction performance of aviation bearing steel via introducing gradient bainite.", journal: "wear", time: "2026-04", status: "撰写中", progress: 0.25 },
-            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-01", status: "已投稿", progress: 0.5 },
             { name: "黄顺进", grade: "研一", title: "待定", journal: "待定", time: "2027-01", status: "规划中", progress: 0 },
             { name: "王佳琪", grade: "研一", title: "Enhanced Surface Wear Resistance of M50NiL Bearing Steel by Tailoring Dual-gradient Structure", journal: "Tribology International", time: "2026-09", status: "规划中", progress: 0 },
             { name: "丁盛阳", grade: "研一", title: "Creep-Fatigue Evolution Mechanisms in Nickel-Based Single Crystal Superalloys under Electromagnetic Shock", journal: "scripta material", time: "2027-01", status: "规划中", progress: 0 },
@@ -901,7 +899,6 @@
             const submittedCount = data.filter(item => item.status === '已投稿').length;
             const reviewingCount = data.filter(item => item.status === '审稿中').length;
             const planningCount = data.filter(item => item.status === '规划中').length;
-			const planningCount = data.filter(item => item.status === '已接收').length;
             
             document.getElementById('writingCount').textContent = writingCount;
             document.getElementById('submittedCount').textContent = submittedCount;
@@ -1035,7 +1032,7 @@
             const select = document.createElement('select');
             select.className = 'status-select';
             
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
