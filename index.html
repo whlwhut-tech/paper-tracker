@@ -678,6 +678,7 @@
                     <option value="规划中">规划中</option>
                     <option value="已投稿">已投稿</option>
                     <option value="审稿中">审稿中</option>
+					<option value="已接收">已接收</option>
                 </select>
                 
                 <button class="add-new-btn" id="addNewBtn">
@@ -771,6 +772,7 @@
                             <option value="撰写中">撰写中</option>
                             <option value="已投稿">已投稿</option>
                             <option value="审稿中">审稿中</option>
+							<option value="已接收">已接收</option>
                         </select>
                     </div>
                 </div>
@@ -794,11 +796,12 @@
     <script>
         // 论文数据
         let thesisData = [
-            { name: "王慧玲", grade: "博士后", title: "Cross-Scale view of stress-state dependent damage mechanisms in high-carbon steel: in-situ probing and a dislocation-damage CPFEM", journal: "International Journal of Plasticity", time: "2026-02", status: "撰写中", progress: 0.25 },
+            { name: "王慧玲", grade: "博士后", title: "Cross-Scale view of stress-state dependent damage mechanisms in high-carbon steel: in-situ probing and a dislocation-damage CPFEM", journal: "International Journal of Plasticity", time: "2026-03", status: "撰写中", progress: 0.25 },
             { name: "王慧玲", grade: "博士后", title: "A novel multiscale modeling to reveal damage mechanisms and law in cold ring rolling processes of high-carbon steel bearing rings", journal: "International Journal of Machine Tools and Manufacture", time: "2026-08", status: "规划中", progress: 0 },
             { name: "孙梦黎", grade: "博五", title: "Time-dependent corrosion performance of the new-generation high-nitrogen bearing steel with heterostructure induced by prior cold rolling", journal: "surface and interface", time: "2026-01", status: "审稿中", progress: 0.75 },
 			{ name: "程喆", grade: "博五", title: "Electrical resistivity response for the dislocation type evolution induced by electroshocking treatment", journal: "Journal of Applied Physics", time: "2026-02", status: "已投稿", progress: 0.5 },            
 			{ name: "程喆", grade: "博五", title: "Exploring the role of CSL grain boundaries in electrical resistivity changes of Fe under pulse current", journal: "Scripta Materialia", time: "2026-07", status: "规划中", progress: 0 },
+			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of materials science & technology 定", time: "2026-02", status: "审稿中", progress: 0.75 },
             { name: "王荣城", grade: "博四", title: "Atomic-scale mechanism of electric field facilitated grain boundary migration in TC11: An in-situ TEM and DFT study", journal: "暂未定", time: "2026-08", status: "规划中", progress: 0 },
             { name: "杜宇辰", grade: "博三", title: "Achieving superior strength-toughness synergy in 2GPa bearing steel by bainite/martensite multiphase matching", journal: "Acta mater.", time: "2026-02", status: "已投稿", progress: 0.5 },
             { name: "杜宇辰", grade: "博三", title: "Unraveling the Uniaxial Tensile Fracture Mechanism of Heterostructured Bearing Steel via Crystal Plasticity Finite Element Simulation Coupled with Microstructural Characterization", journal: "International Journal of Plasticity", time: "2026-07", status: "规划中", progress: 0 },
@@ -898,6 +901,7 @@
             const submittedCount = data.filter(item => item.status === '已投稿').length;
             const reviewingCount = data.filter(item => item.status === '审稿中').length;
             const planningCount = data.filter(item => item.status === '规划中').length;
+			const planningCount = data.filter(item => item.status === '已接收').length;
             
             document.getElementById('writingCount').textContent = writingCount;
             document.getElementById('submittedCount').textContent = submittedCount;
@@ -1031,7 +1035,7 @@
             const select = document.createElement('select');
             select.className = 'status-select';
             
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
