@@ -253,18 +253,28 @@
         }
         
         .status-规划中 {
-            background-color: #d1ecf1;
-            color: #0c5460;
+            background-color: #e9ecef; 
+            color: #495057;
         }
         
         .status-已投稿 {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: #c3f0d8;
+            color: #0a5c36;
         }
         
         .status-审稿中 {
             background-color: #e2d9f3;
             color: #3d2a6d;
+        }
+        
+        .status-已接收 {
+            background-color: #d1f2eb;
+            color: #0d6251;
+        }
+        
+        .status-返修中 {
+            background-color: #f8d7da;
+            color: #721c24;
         }
         
         .grade-tag {
@@ -648,9 +658,13 @@
                 <div class="stat-box">
                     <div class="stat-number">0</div>
                     <div class="stat-label">已接收</div>
+                </div>		
+                <div class="stat-box">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">返修中</div>
                 </div>				
                 <div class="stat-box">
-                    <div class="stat-number">22</div>
+                    <div class="stat-number">0</div>
                     <div class="stat-label">规划中</div>
                 </div>
             </div>
@@ -682,6 +696,8 @@
                     <option value="规划中">规划中</option>
                     <option value="已投稿">已投稿</option>
                     <option value="审稿中">审稿中</option>
+                    <option value="已接收">已接收</option>
+                    <option value="返修中">返修中</option>
                 </select>
                 
                 <button class="add-new-btn" id="addNewBtn">
@@ -775,6 +791,8 @@
                             <option value="撰写中">撰写中</option>
                             <option value="已投稿">已投稿</option>
                             <option value="审稿中">审稿中</option>
+                            <option value="已接收">已接收</option>
+                            <option value="返修中">返修中</option>
                         </select>
                     </div>
                 </div>
@@ -803,27 +821,28 @@
             { name: "孙梦黎", grade: "博五", title: "Time-dependent corrosion performance of the new-generation high-nitrogen bearing steel with heterostructure induced by prior cold rolling", journal: "surface and interface", time: "2026-03", status: "已接收", progress: 1 },
 			{ name: "程喆", grade: "博五", title: "Electrical resistivity response for the dislocation type evolution induced by electroshocking treatment", journal: "Journal of Applied Physics", time: "2026-03", status: "撰写中", progress: 0.25 },            
 			{ name: "程喆", grade: "博五", title: "Exploring the role of CSL grain boundaries in electrical resistivity changes of Fe under pulse current", journal: "Scripta Materialia", time: "2026-07", status: "规划中", progress: 0 },
-			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of Materials Science & Technology", time: "2026-02", status: "审稿中", progress: 0.75 },
-            { name: "王荣城", grade: "博四", title: "Atomic-scale mechanism of electric field facilitated grain boundary migration in TC11: An in-situ TEM and DFT study", journal: "暂未定", time: "2026-08", status: "规划中", progress: 0 },
+			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of Materials Science & Technology", time: "2026-02", status: "返修中", progress: 0.75 },
+            { name: "王荣城", grade: "博四", title: "Atomic-scale mechanism of electric field facilitated grain boundary migration and ordering: An in-situ TEM and DFT study", journal: "暂未定", time: "2026-08", status: "规划中", progress: 0 },
             { name: "杜宇辰", grade: "博三", title: "Achieving superior strength-toughness synergy in 2GPa bearing steel by bainite/martensite multiphase matching", journal: "暂未定", time: "2026-04", status: "撰写中", progress: 0.25 },
             { name: "杜宇辰", grade: "博三", title: "Unraveling the Uniaxial Tensile Fracture Mechanism of Heterostructured Bearing Steel via Crystal Plasticity Finite Element Simulation Coupled with Microstructural Characterization", journal: "International Journal of Plasticity", time: "2026-07", status: "规划中", progress: 0 },
             { name: "杜宇辰", grade: "博三", title: "Rolling contact fatigue behavior of bearing steel with martensite-bainite duplex structures of different strength-toughness combinations", journal: "Mater. lett.", time: "2026-05", status: "规划中", progress: 0 },
             { name: "陈建城", grade: "博二", title: "Grain boundary structure stabilization via low-energy electropulsing enhances strength-ductility synergy", journal: "Advanced science", time: "2026-04", status: "撰写中", progress: 0.25 },
             { name: "陈建城", grade: "博二", title: "A physics-informed machine learning framework for quantifying current-induced atomic stress evolution in titanium", journal: "Materials today physic", time: "2026-05", status: "规划中", progress: 0 },
-            { name: "陆云彬", grade: "博二", title: "Breakthrough in wear resistance by constructing the novel gradient dual Martensite/Bainite heterostructure in bearing steel", journal: "Tribology International", time: "2026-03", status: "审稿中", progress: 0.75 },
+            { name: "陆云彬", grade: "博二", title: "Breakthrough in wear resistance by constructing the novel gradient dual Martensite/Bainite heterostructure in bearing steel", journal: "Tribology International", time: "2026-03", status: "审稿中", progress: 0.5 },
             { name: "陆云彬", grade: "博二", title: "Enhancement of Wear Resistance via Dual Gradient Structural Design", journal: "acta", time: "2026-07", status: "规划中", progress: 0 },
             { name: "肖攀", grade: "博二", title: "待定", journal: "待定", time: "2026-06", status: "规划中", progress: 0 },
             { name: "张啸", grade: "博二", title: "待定", journal: "待定", time: "2026-07", status: "规划中", progress: 0 }, 
             { name: "刘人珲", grade: "博一", title: "A Deep Learning Approach to Analyzing the Relationship Between Microstructure and Properties of Mar-Bainitic bearing steels", journal: "International Journal of Plasticity", time: "2026-09", status: "规划中", progress: 0 },
             { name: "薛逍", grade: "博一", title: "Research on Process Parameter Prediction of Large Ring Components Based on Digital Twin", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
             { name: "刘再华", grade: "博一", title: "待定", journal: "待定", time: "2026-11", status: "规划中", progress: 0 },			
-            { name: "唐桂花", grade: "研三", title: "新能源汽车轴承套圈锻造过程流线演变与调控研究", journal: "塑性工程学报", time: "2026-03", status: "审稿中", progress: 0.75 },
-            { name: "何亚妮", grade: "研三", title: "电磁冲击处理对高温合金组织和力学性能的影响", journal: "钢铁钒钛", time: "2026-03", status: "审稿中", progress: 0.75 },
+            { name: "唐桂花", grade: "研三", title: "新能源汽车轴承套圈锻造过程流线演变与调控研究", journal: "塑性工程学报", time: "2026-03", status: "审稿中", progress: 0.5 },
+            { name: "何亚妮", grade: "研三", title: "电磁冲击处理对高温合金组织和力学性能的影响", journal: "钢铁钒钛", time: "2026-03", status: "审稿中", progress: 0.5 },
 			{ name: "何亚妮", grade: "研三", title: "Stabilizing γ/γ' phase interface for improving high-temperature creep resistance of Nickel-based Superalloys via a novel electromagnetic shocking treatment", journal: "Acta mater.", time: "2026-02", status: "撰写中", progress: 0.25 },
             { name: "宋正杰", grade: "研三", title: "Targeted effect and homogenized mechanism of microscopic residual stress of TC11 titanium alloys via electromagnetic shocking", journal: "Transactions of Nonferrous Metals Society of China", time: "2026-12", status: "已投稿", progress: 0.5 },
-            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-01", status: "已投稿", progress: 0.5 },
+			{ name: "宋正杰", grade: "研三", title: "电冲击处理对钛合金残余应力及疲劳性能的影响", journal: "钢铁钒钛", time: "2026-02", status: "已投稿", progress: 0.5 },
+            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-01", status: "审稿中", progress: 0.5 },
 			{ name: "肖乐雨", grade: "研二", title: "Dissolution Mechanism and Prediction of Carbides in High-carbon Chromium Bearing Steel Subjected to Cold Rolling and Heat Treatment", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
-            { name: "宋佳龙", grade: "研二", title: "Interface bonding mechanism of Ti-551 during electrically assisted hot compression bonding", journal: "Materials Science and Engineering: A", time: "2026-04", status: "审稿中", progress: 0.75 },
+            { name: "宋佳龙", grade: "研二", title: "Interface bonding mechanism of Ti-551 during electrically assisted hot compression bonding", journal: "Materials Science and Engineering: A", time: "2026-04", status: "审稿中", progress: 0.5 },
             { name: "易伟", grade: "研二", title: "High-quality interface bonding of 60NiTi and 100Cr6 heterogeneous materials achieved by combining laser cladding with electrically assisted", journal: "", time: "2026-04", status: "规划中", progress: 0 },
             { name: "刘傲宇", grade: "研二", title: "Enhanced Strength-Ductility Synergy in TC11 Titanium Alloy via Harmonic Heterostructure Induced by Rapid Heating Deformation", journal: "Materials Science and Engineering: A", time: "2026-07", status: "规划中", progress: 0 },
             { name: "刘耀东", grade: "研二", title: "Physics-Informed and Data-Driven Multi-objective Process Optimization for 316H Super-large Rings", journal: "Journal Of Manufacturing Processses", time: "2026-09", status: "规划中", progress: 0 },
@@ -900,12 +919,24 @@
         
         // 更新统计数据
         function updateStats(data) {
+            console.log('统计计算：');
+            console.log('总论文数：', data.length);
+
             document.getElementById('totalCount').textContent = data.length;
             const writingCount = data.filter(item => item.status === '撰写中').length;
             const submittedCount = data.filter(item => item.status === '已投稿').length;
             const reviewingCount = data.filter(item => item.status === '审稿中').length;			
             const planningCount = data.filter(item => item.status === '规划中').length;
             const acceptedCount = data.filter(item => item.status === '已接收').length;
+            const revisionCount = data.filter(item => item.status === '返修中').length;
+			
+						
+            console.log('撰写中数量：', writingCount);
+            console.log('已投稿数量：', submittedCount);
+            console.log('审稿中数量：', reviewingCount);
+            console.log('规划中数量：', planningCount);
+            console.log('已接收数量：', acceptedCount);
+            console.log('返修中数量：', revisionCount);
             
             document.getElementById('writingCount').textContent = writingCount;
             document.getElementById('submittedCount').textContent = submittedCount;
@@ -916,7 +947,8 @@
             document.querySelector('.stats .stat-box:nth-child(3) .stat-number').textContent = writingCount;
             document.querySelector('.stats .stat-box:nth-child(4) .stat-number').textContent = reviewingCount;
 			document.querySelector('.stats .stat-box:nth-child(5) .stat-number').textContent = acceptedCount;
-            document.querySelector('.stats .stat-box:nth-child(6) .stat-number').textContent = planningCount;
+			document.querySelector('.stats .stat-box:nth-child(6) .stat-number').textContent = revisionCount;
+            document.querySelector('.stats .stat-box:nth-child(7) .stat-number').textContent = planningCount;
         }
         
         // 添加编辑事件监听器
@@ -1040,7 +1072,7 @@
             const select = document.createElement('select');
             select.className = 'status-select';
             
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '返修中'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
@@ -1185,7 +1217,7 @@
             // 创建状态下拉框
             const statusSelect = document.createElement('select');
             statusSelect.className = 'status-select';
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '返修中'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
@@ -1464,7 +1496,7 @@
                 });
                 
                 renderTable(filteredData);
-				updataStates(thesisData);
+				updateStats(thesisData);
             }
             
             searchInput.addEventListener('input', filterData);
