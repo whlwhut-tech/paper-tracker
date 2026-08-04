@@ -272,7 +272,7 @@
             color: #0d6251;
         }
         
-        .status-已返修 {
+        .status-返修中 {
             background-color: #f8d7da;
             color: #721c24;
         }
@@ -661,7 +661,7 @@
                 </div>		
                 <div class="stat-box">
                     <div class="stat-number">0</div>
-                    <div class="stat-label">已返修</div>
+                    <div class="stat-label">返修中</div>
                 </div>				
                 <div class="stat-box">
                     <div class="stat-number">0</div>
@@ -697,7 +697,7 @@
                     <option value="已投稿">已投稿</option>
                     <option value="审稿中">审稿中</option>
                     <option value="已接收">已接收</option>
-                    <option value="已返修">已返修</option>
+                    <option value="返修中">返修中</option>
                 </select>
                 
                 <button class="add-new-btn" id="addNewBtn">
@@ -792,7 +792,7 @@
                             <option value="已投稿">已投稿</option>
                             <option value="审稿中">审稿中</option>
                             <option value="已接收">已接收</option>
-                            <option value="已返修">已返修</option>
+                            <option value="返修中">返修中</option>
                         </select>
                     </div>
                 </div>
@@ -816,47 +816,49 @@
     <script>
         // 论文数据
         let thesisData = [
-            { name: "王慧玲", grade: "博士后", title: "A novel multiscale modeling to reveal damage mechanisms and law in cold ring rolling processes of high-carbon steel bearing rings", journal: "International Journal of Machine Tools and Manufacture", time: "2026-08", status: "规划中", progress: 0 },
+            { name: "王慧玲", grade: "博士后", title: "Stress-state dependent competition of damage mechanisms in ferrite-cementite steel: Experiments and multiscale modeling", journal: "International Journal of Plasticity", time: "2026-07", status: "审稿中", progress: 0.5 },
+			{ name: "王慧玲", grade: "博士后", title: "Mechanisms governing the strength-ductility synergy in hierarchically heterogeneous bearing steel: from heterogeneous deformation to damage accommodation", journal: "International Journal of Plasticity", time: "2026-08", status: "撰写中", progress: 0.25 },	
+			{ name: "王慧玲", grade: "博士后", title: "A novel multiscale modeling to reveal damage mechanisms and law in cold ring rolling processes of high-carbon steel bearing rings", journal: "International Journal of Machine Tools and Manufacture", time: "2026-12", status: "规划中", progress: 0 },
 			{ name: "孙梦黎", grade: "博五", title: "Time-dependent corrosion performance of the new-generation high-nitrogen bearing steel with heterostructure induced by prior cold rolling", journal: "Surfaces and Interfaces", time: "2026-03", status: "已接收", progress: 1 },
-        	{ name: "程喆", grade: "博五", title: "Electrical resistivity response for the dislocation type evolution induced by electroshocking treatment", journal: "Journal of Applied Physics", time: "2026-03", status: "撰写中", progress: 0.25 },            
-			{ name: "程喆", grade: "博五", title: "Exploring the role of CSL grain boundaries in electrical resistivity changes of Fe under pulse current", journal: "Scripta Materialia", time: "2026-07", status: "规划中", progress: 0 },
-			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of Materials Science & Technology", time: "2026-04", status: "已返修", progress: 0.95 },
-            { name: "王荣城", grade: "博四", title: "Atomic-scale mechanism of electric field facilitated grain boundary migration and ordering: An in-situ TEM and DFT study", journal: "待定", time: "2026-08", status: "规划中", progress: 0 },
-            { name: "杜宇辰", grade: "博三", title: "Achieving superior strength-toughness synergy in 2GPa bearing steel by bainite/martensite multiphase matching", journal: "待定", time: "2026-04", status: "撰写中", progress: 0.25 },
-            { name: "杜宇辰", grade: "博三", title: "Unraveling the Uniaxial Tensile Fracture Mechanism of Heterostructured Bearing Steel via Crystal Plasticity Finite Element Simulation Coupled with Microstructural Characterization", journal: "International Journal of Plasticity", time: "2026-07", status: "规划中", progress: 0 },
-            { name: "杜宇辰", grade: "博三", title: "Rolling contact fatigue behavior of bearing steel with martensite-bainite duplex structures of different strength-toughness combinations", journal: "Mater. lett.", time: "2026-05", status: "规划中", progress: 0 },
-            { name: "陈建城", grade: "博二", title: "Grain boundary structure stabilization via low-energy electropulsing enhances strength-ductility synergy", journal: "Advanced science", time: "2026-04", status: "审稿中", progress: 0.5 },
+        	{ name: "程喆", grade: "博五", title: "Electrical resistivity response for the dislocation type evolution induced by electroshocking treatment", journal: "Journal of Applied Physics", time: "2026-08", status: "撰写中", progress: 0.25 },            
+			{ name: "程喆", grade: "博五", title: "Exploring the role of CSL grain boundaries in electrical resistivity changes of Fe under pulse current", journal: "Scripta Materialia", time: "2026-09", status: "规划中", progress: 0 },
+			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of Materials Science & Technology", time: "2026-05", status: "已接收", progress: 1 },
+            { name: "王荣城", grade: "博四", title: "Electro-Thermal Decoupling of Electrically Driven Grain Boundary Migration", journal: "Nature communication", time: "2026-07", status: "撰写中", progress: 0.25 },
+            { name: "杜宇辰", grade: "博三", title: "Ultrafine martensite/bainite heterostructure achieves synergistic strength and toughness of bearing steel", journal: "Materials Research Letters", time: "2026-07", status: "已投稿", progress: 0.5 },
+            { name: "杜宇辰", grade: "博三", title: "Multi-Scale Investigation on Subsurface Rolling Contact Fatigue Damage and Fracture Mechanism of Ultrafine Martensite-Bainite Heterostructured 100Cr6 Bearing Steel", journal: "International Journal of Fatigue", time: "2026-12", status: "规划中", progress: 0 },
+            { name: "陈建城", grade: "博二", title: "Grain boundary structure stabilization via low-energy electropulsing enhances strength-ductility synergy", journal: "Advanced science", time: "2026-04", status: "已接收", progress: 0.75 },
             { name: "陈建城", grade: "博二", title: "A physics-informed machine learning framework for quantifying current-induced atomic stress evolution in titanium", journal: "Materials today physic", time: "2026-05", status: "规划中", progress: 0 },
-            { name: "陆云彬", grade: "博二", title: "Breakthrough in wear resistance by constructing the novel gradient dual Martensite/Bainite heterostructure in bearing steel", journal: "Tribology International", time: "2026-04", status: "已返修", progress: 0.95 },
-            { name: "陆云彬", grade: "博二", title: "Enhancement of Wear Resistance via Dual Gradient Structural Design", journal: "Acta Materialia", time: "2026-07", status: "规划中", progress: 0 },
+            { name: "陆云彬", grade: "博二", title: "Breakthrough in wear resistance by constructing the novel gradient dual Martensite/Bainite heterostructure in bearing steel", journal: "Tribology International", time: "2026-07", status: "已接收", progress: 1 },
+            { name: "陆云彬", grade: "博二", title: "Synergistic Improvement of Rolling Contact Fatigue  via Heterogeneous Gradient Structural Design", journal: "Acta Materialia", time: "2026-10", status: "规划中", progress: 0 },
             { name: "肖攀", grade: "博二", title: "Enhancing local thermal conductivity via electroshocking induced grain boundary ordering", journal: "Acta Materialia", time: "2026-07", status: "规划中", progress: 0 },
-            { name: "张啸", grade: "博二", title: "待定", journal: "待定", time: "2026-07", status: "规划中", progress: 0 }, 
+            { name: "张啸", grade: "博二", title: "Effect of multi-fire hot ring rolling on Microstructure,Mechanical Properties and Fracture Failure Behavior of Mg-Gd-Y-Zn Alloy", journal: "Journal of Materials Processing Technology", time: "2026-10", status: "撰写中", progress: 0.25 }, 
             { name: "刘人珲", grade: "博一", title: "A Deep Learning Approach to Analyzing the Relationship Between Microstructure and Properties of Mar-Bainitic bearing steels", journal: "International Journal of Plasticity", time: "2026-09", status: "规划中", progress: 0 },
             { name: "薛逍", grade: "博一", title: "Research on Process Parameter Prediction of Large Ring Components Based on Digital Twin", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
             { name: "刘再华", grade: "博一", title: "待定", journal: "待定", time: "2026-11", status: "规划中", progress: 0 },			
             { name: "唐桂花", grade: "研三", title: "新能源汽车轴承套圈锻造过程流线演变与调控研究", journal: "塑性工程学报", time: "2026-04", status: "已接收", progress: 1 },
-            { name: "何亚妮", grade: "研三", title: "电磁冲击处理对高温合金组织和力学性能的影响", journal: "钢铁钒钛", time: "2026-03", status: "审稿中", progress: 0.5 },
-			{ name: "何亚妮", grade: "研三", title: "Stabilizing γ/γ' phase interface for improving high-temperature creep resistance of Nickel-based Superalloys via a novel electromagnetic shocking treatment", journal: "Acta Materialia", time: "2026-04", status: "撰写中", progress: 0.25 },
-            { name: "宋正杰", grade: "研三", title: "Targeted effect and homogenized mechanism of microscopic residual stress of TC11 titanium alloys via electromagnetic shocking", journal: "Transactions of Nonferrous Metals Society of China", time: "2026-12", status: "已投稿", progress: 0.5 },
+            { name: "何亚妮", grade: "研三", title: "电磁冲击处理对高温合金组织和力学性能的影响", journal: "钢铁钒钛", time: "2026-04", status: "已接收", progress: 1 },
+			{ name: "何亚妮", grade: "研三", title: "Stabilizing γ/γ' phase interface for improving high-temperature creep resistance of Nickel-based Superalloys via a novel electromagnetic shocking treatment", journal: "Acta Materialia", time: "2026-07", status: "审稿中", progress: 0.5 },
+            { name: "宋正杰", grade: "研三", title: "Targeted effect and homogenized mechanism of microscopic residual stress of TC11 titanium alloys via electromagnetic shocking", journal: "Transactions of Nonferrous Metals Society of China", time: "2026-07", status: "审稿中", progress: 0.75 },
 			{ name: "宋正杰", grade: "研三", title: "电冲击处理对钛合金残余应力及疲劳性能的影响", journal: "钢铁钒钛", time: "2026-02", status: "已接收", progress: 1 },
-            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-01", status: "审稿中", progress: 0.5 },
+            { name: "王天乐", grade: "研三", title: "钛合金薄壁环件制造过程残余应力与加工变形仿真分析与工艺优化", journal: "钢铁钒钛", time: "2026-04", status: "已接收", progress: 1 },
 			{ name: "秦书航", grade: "研三", title: "基于机器学习的大型环件径-轴向轧制路径智能设计方法", journal: "塑性工程学报", time: "2026-04", status: "已接收", progress: 1 },
-			{ name: "肖乐雨", grade: "研二", title: "Dissolution Mechanism and Prediction of Carbides in High-carbon Chromium Bearing Steel Subjected to Cold Rolling and Heat Treatment", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
+			{ name: "肖乐雨", grade: "研二", title: "Dissolution Mechanism and Prediction of Carbides in High-carbon Chromium Bearing Steel Subjected to Rolling and Heat Treatment", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
 			{ name: "刘颖", grade: "研二", title: "Improving oil wettability via electroshock induced surface atomic-level reconstruction", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
-            { name: "宋佳龙", grade: "研二", title: "Interface bonding mechanism of Ti-551 during electrically assisted hot compression bonding", journal: "Materials Science and Engineering: A", time: "2026-04", status: "审稿中", progress: 0.5 },
+            { name: "宋佳龙", grade: "研二", title: "Interface bonding mechanism of Ti-551 during electrically assisted hot compression bonding", journal: "Materials Science and Engineering: A", time: "2026-07", status: "已接收", progress: 1 },
 			{ name: "宋佳龙", grade: "研二", title: "Multiscale Simulation and Microstructural Characteristics of Electrically Assisted Hot-Compression Bonding for Ti-551/316L", journal: "待定", time: "待定", status: "规划中", progress: 0 },
-            { name: "易伟", grade: "研二", title: "High-quality interface bonding of 60NiTi and 100Cr6 heterogeneous materials achieved by combining laser cladding with electrically assisted", journal: "", time: "2026-04-25", status: "规划中", progress: 0 },
-            { name: "刘傲宇", grade: "研二", title: "Enhanced Strength-Ductility Synergy in TC11 Titanium Alloy via Harmonic Heterostructure Induced by Rapid Heating Deformation", journal: "Materials Science and Engineering: A", time: "2026-07", status: "规划中", progress: 0 },
-            { name: "刘耀东", grade: "研二", title: "Physics-Informed and Data-Driven Multi-objective Process Optimization for 316H Super-large Rings", journal: "Journal of Manufacturing Processses", time: "2026-09", status: "规划中", progress: 0 },
-            { name: "吴正焱", grade: "研二", title: "Random Forest-Based Optimization Design of the Rolling Process for Large Thin-Walled Titanium Alloy Rings", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
+            { name: "易伟", grade: "研二", title: "Effect of electrically assisted hot-compression bonding on the interfacial microstructure and properties of laser-cladded 60NiTi coatings on 100Cr6 steel", journal: "Optics and Laser Technology", time: "2026-08", status: "已投稿", progress: 0.75 },
+            { name: "刘傲宇", grade: "研二", title: "Achieving synergistic strength-ductility enhancement in titanium alloy via chemically induced heterogeneous microstructures", journal: "Scripta Materialia ", time: "2026-09", status: "撰写中", progress: 0.25 },
+            { name: "刘耀东", grade: "研二", title: "Physics-Guided Surrogate Modeling and Support-Constrained Multi-Objective Optimization of Force–Temperature Responses during Radial–Axial Ring Rolling of Ultra-Large 316H Stainless Steel Rings", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
+            { name: "吴正焱", grade: "研二", title: "Gaussian-process-assisted prediction and multi-objective temperature–load optimization for large thin-walled Ti551 ring rolling", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
             { name: "周雪", grade: "研二", title: "Inhibiting hydrogen-induced stress corrosion cracking via Electromagnetic Shocking induced surface structure stabilization", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
-            { name: "沈子扬", grade: "研二", title: "Ti551钛合金热变形行为和热加工图研究", journal: "钢铁钒钛", time: "2026-01", status: "已投稿", progress: 0.5 },
-            { name: "谭美如", grade: "研一", title: "Improve the friction performance of aviation bearing steel via introducing gradient bainite.", journal: "Wear", time: "2026-04", status: "撰写中", progress: 0.25 },
+            { name: "沈子扬", grade: "研二", title: "Ti551钛合金热变形行为和热加工图研究", journal: "钢铁钒钛", time: "2026-05", status: "已接收", progress: 1 },
+			{ name: "张驰骋", grade: "研二", title: "大型环件动态轧制过程椭圆度的精准测量与控制方法", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
+            { name: "谭美如", grade: "研一", title: "Improve the friction performance of aviation bearing steel via introducing gradient bainite.", journal: "Wear", time: "2026-07", status: "审稿中", progress: 0.75 },
             { name: "黄顺进", grade: "研一", title: "待定", journal: "待定", time: "2027-01", status: "规划中", progress: 0 },
             { name: "王佳琪", grade: "研一", title: "Enhanced Surface Wear Resistance of M50NiL Bearing Steel by Tailoring Dual-gradient Structure", journal: "Tribology International", time: "2026-09", status: "规划中", progress: 0 },
             { name: "丁盛阳", grade: "研一", title: "Creep-Fatigue Evolution Mechanisms in Nickel-Based Single Crystal Superalloys under Electromagnetic Shock", journal: "scripta material", time: "2027-01", status: "规划中", progress: 0 },
 			{ name: "邱超", grade: "研一", title: "Deep learning-based machine vision system for global real-time detection of ring rolling deformation process", journal: "待定", time: "2027-02", status: "规划中", progress: 0 },
-            { name: "陈艳", grade: "研一", title: "Correlation between Grain Boundary Atomic Rearrangement and Phonon States in PCBN Tools under Electromagnetic Field", journal: "待定", time: "2027-02", status: "规划中", progress: 0 }
+            { name: "陈艳", grade: "研一", title: "Correlation between Grain Boundary Atomic Rearrangement and Phonon States in PCBN Tools under Electromagnetic Field", journal: "待定", time: "2027-09", status: "撰写中", progress: 0.25 }
         ];
 
         // 当前编辑的行索引和字段
@@ -930,7 +932,7 @@
             const reviewingCount = data.filter(item => item.status === '审稿中').length;			
             const planningCount = data.filter(item => item.status === '规划中').length;
             const acceptedCount = data.filter(item => item.status === '已接收').length;
-            const revisionCount = data.filter(item => item.status === '已返修').length;
+            const revisionCount = data.filter(item => item.status === '返修中').length;
 			
 						
             console.log('撰写中数量：', writingCount);
@@ -938,7 +940,7 @@
             console.log('审稿中数量：', reviewingCount);
             console.log('规划中数量：', planningCount);
             console.log('已接收数量：', acceptedCount);
-            console.log('已返修数量：', revisionCount);
+            console.log('返修中数量：', revisionCount);
             
             document.getElementById('writingCount').textContent = writingCount;
             document.getElementById('submittedCount').textContent = submittedCount;
@@ -1074,7 +1076,7 @@
             const select = document.createElement('select');
             select.className = 'status-select';
             
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '已返修'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '返修中'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
@@ -1219,7 +1221,7 @@
             // 创建状态下拉框
             const statusSelect = document.createElement('select');
             statusSelect.className = 'status-select';
-            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '已返修'];
+            const statuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '返修中'];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
@@ -1586,3 +1588,4 @@
     </script>
 </body>
 </html>
+
