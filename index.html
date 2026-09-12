@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>论文进度追踪系统</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -630,6 +629,40 @@
             outline: none;
             border-color: #1a6dcc;
         }
+
+        /* 单文件版本不加载任何外部图标资源 */
+        .fas::before { display: inline-block; width: 1.1em; text-align: center; font-style: normal; }
+        .fa-tasks::before { content: "▦"; }
+        .fa-search::before { content: "⌕"; }
+        .fa-plus::before, .fa-plus-circle::before { content: "+"; }
+        .fa-info-circle::before { content: "ⓘ"; }
+        .fa-edit::before { content: "✎"; }
+        .fa-trash::before { content: "×"; }
+        .fa-save::before { content: "✓"; }
+        .fa-times::before { content: "×"; }
+        .fa-check-circle::before { content: "✓"; }
+
+        .data-btn {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #37546b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .data-btn:hover { border-color: #1a6dcc; color: #1a6dcc; }
+
+        .storage-note {
+            padding: 10px 30px;
+            background: #fff8e8;
+            color: #7b5a16;
+            border-bottom: 1px solid #f1dfb7;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -703,7 +736,14 @@
                 <button class="add-new-btn" id="addNewBtn">
                     <i class="fas fa-plus"></i> 添加新论文
                 </button>
+                <button class="data-btn" id="exportDataBtn" type="button">导出数据</button>
+                <button class="data-btn" id="importDataBtn" type="button">导入数据</button>
+                <input id="importDataFile" type="file" accept="application/json,.json" hidden>
             </div>
+        </div>
+
+        <div class="storage-note">
+            GitHub Pages 单文件版：修改会保存在当前浏览器。不同设备或不同成员之间若要实时共享同一份数据，需要另行连接在线数据库。
         </div>
         
         <div class="edit-notice">
@@ -731,7 +771,7 @@
         </div>
         
         <footer>
-            <p>论文进度追踪系统 &copy; 2025 | 最后更新: <span id="lastUpdateDate">2025-01-15</span> | 数据来源: 论文计划.xlsx</p>
+            <p>论文进度追踪系统 &copy; 2026 | 最后更新: <span id="lastUpdateDate">2026-09-12</span> | 数据保存在当前浏览器</p>
             <p style="margin-top: 5px; font-size: 12px; color: #888;">共 <span id="totalCount">34</span> 篇论文，其中 <span id="writingCount">5</span> 篇撰写中，<span id="submittedCount">6</span> 篇已投稿</p>
         </footer>
     </div>
@@ -815,15 +855,15 @@
 
     <script>
         // 论文数据
-        let thesisData = [
-            { name: "王慧玲", grade: "博士后", title: "Stress-state dependent competition of damage mechanisms in ferrite-cementite steel: Experiments and multiscale modeling", journal: "International Journal of Plasticity", time: "2026-09-30", status: "返修中", progress: 0.75 },
+        const defaultThesisData = [
+            { name: "王慧玲", grade: "博士后", title: "Stress-state dependent competition of damage mechanisms in ferrite-cementite steel: Experiments and multiscale modeling", journal: "International Journal of Plasticity", time: "2026-09-30", status: "返修中", progress: 0.5 },
 			{ name: "王慧玲", grade: "博士后", title: "Mechanisms governing the strength-ductility synergy in hierarchically heterogeneous bearing steel: from heterogeneous deformation to damage accommodation", journal: "International Journal of Plasticity", time: "2026-10", status: "撰写中", progress: 0.25 },	
 			{ name: "孙梦黎", grade: "博五", title: "Time-dependent corrosion performance of the new-generation high-nitrogen bearing steel with heterostructure induced by prior cold rolling", journal: "Surfaces and Interfaces", time: "2026-03", status: "已接收", progress: 1 },
         	{ name: "程喆", grade: "博五", title: "Electrical resistivity response for the dislocation type evolution induced by electroshocking treatment", journal: "Journal of Applied Physics", time: "2026-08", status: "撰写中", progress: 0.25 },            
 			{ name: "程喆", grade: "博五", title: "Exploring the role of CSL grain boundaries in electrical resistivity changes of Fe under pulse current", journal: "Scripta Materialia", time: "2026-09", status: "规划中", progress: 0 },
 			{ name: "王荣城", grade: "博四", title: "Electromagnetic shock induced CSL boundaries formation to enhance fatigue properties of Ti-6.5Al-3.5Mo-1.5Zr-0.3Si", journal: "Journal of Materials Science & Technology", time: "2026-05", status: "已接收", progress: 1 },
             { name: "王荣城", grade: "博四", title: "Electro-Thermal Decoupling of Electrically Driven Grain Boundary Migration", journal: "Nature communication", time: "2026-07", status: "撰写中", progress: 0.25 },
-            { name: "杜宇辰", grade: "博三", title: "Ultrafine martensite/bainite heterostructure achieves synergistic strength and toughness of bearing steel", journal: "Materials Research Letters", time: "2026-10", status: "返修中", progress: 0.75 },
+            { name: "杜宇辰", grade: "博三", title: "Ultrafine martensite/bainite heterostructure achieves synergistic strength and toughness of bearing steel", journal: "Materials Research Letters", time: "2026-07", status: "返修中", progress: 0.5 },
             { name: "杜宇辰", grade: "博三", title: "Multi-Scale Investigation on Subsurface Rolling Contact Fatigue Damage and Fracture Mechanism of Ultrafine Martensite-Bainite Heterostructured 100Cr6 Bearing Steel", journal: "International Journal of Fatigue", time: "2026-12", status: "规划中", progress: 0 },
             { name: "陈建城", grade: "博二", title: "Grain boundary structure stabilization via low-energy electropulsing enhances strength-ductility synergy", journal: "Advanced science", time: "2026-04", status: "已接收", progress: 0.75 },
             { name: "陈建城", grade: "博二", title: "A physics-informed machine learning framework for quantifying current-induced atomic stress evolution in titanium", journal: "Materials today physic", time: "2026-05", status: "规划中", progress: 0 },
@@ -847,9 +887,9 @@
 			{ name: "宋佳龙", grade: "研二", title: "Multiscale Simulation and Microstructural Characteristics of Electrically Assisted Hot-Compression Bonding for Ti-551/316L", journal: "待定", time: "待定", status: "规划中", progress: 0 },
             { name: "易伟", grade: "研二", title: "Effect of electrically assisted hot-compression bonding on the interfacial microstructure and properties of laser-cladded 60NiTi coatings on 100Cr6 steel", journal: "Optics and Laser Technology", time: "2026-08", status: "已投稿", progress: 0.75 },
             { name: "刘傲宇", grade: "研二", title: "Achieving synergistic strength-ductility enhancement in titanium alloy via chemically induced heterogeneous microstructures", journal: "Scripta Materialia ", time: "2026-09", status: "撰写中", progress: 0.25 },
-            { name: "刘耀东", grade: "研二", title: "Physics-Guided Surrogate Modeling and Support-Constrained Multi-Objective Optimization of Force–Temperature Responses during Radial–Axial Ring Rolling of Ultra-Large 316H Stainless Steel Rings", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.5 },
-            { name: "吴正焱", grade: "研二", title: "Gaussian-process-assisted prediction and multi-objective temperature–load optimization for large thin-walled Ti551 ring rolling", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.5 },
-            { name: "周雪", grade: "研二", title: "Inhibiting hydrogen-induced stress corrosion cracking via Electromagnetic Shocking induced surface structure stabilization", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.5 },
+            { name: "刘耀东", grade: "研二", title: "Physics-Guided Surrogate Modeling and Support-Constrained Multi-Objective Optimization of Force–Temperature Responses during Radial–Axial Ring Rolling of Ultra-Large 316H Stainless Steel Rings", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
+            { name: "吴正焱", grade: "研二", title: "Gaussian-process-assisted prediction and multi-objective temperature–load optimization for large thin-walled Ti551 ring rolling", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
+            { name: "周雪", grade: "研二", title: "Inhibiting hydrogen-induced stress corrosion cracking via Electromagnetic Shocking induced surface structure stabilization", journal: "待定", time: "2026-09", status: "撰写中", progress: 0.25 },
             { name: "沈子扬", grade: "研二", title: "Ti551钛合金热变形行为和热加工图研究", journal: "钢铁钒钛", time: "2026-05", status: "已接收", progress: 1 },
 			{ name: "张驰骋", grade: "研二", title: "大型环件动态轧制过程椭圆度的精准测量与控制方法", journal: "待定", time: "2026-09", status: "规划中", progress: 0 },
             { name: "谭美如", grade: "研一", title: "Improve the friction performance of aviation bearing steel via introducing gradient bainite.", journal: "Wear", time: "2026-09-22", status: "返修中", progress: 0.75 },
@@ -860,6 +900,61 @@
             { name: "陈艳", grade: "研一", title: "Correlation between Grain Boundary Atomic Rearrangement and Phonon States in PCBN Tools under Electromagnetic Field", journal: "待定", time: "2027-09", status: "撰写中", progress: 0.25 }
         ];
 
+        const STORAGE_KEY = 'research-paper-tracker-data-v1';
+        const UPDATED_KEY = 'research-paper-tracker-updated-v1';
+        const allowedStatuses = ['规划中', '撰写中', '已投稿', '审稿中', '已接收', '返修中'];
+
+        function loadStoredData() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (!stored) return defaultThesisData.map(item => ({ ...item }));
+                const parsed = JSON.parse(stored);
+                if (!Array.isArray(parsed)) throw new Error('数据格式错误');
+                return parsed.filter(isValidPaper).map(item => ({
+                    name: String(item.name).trim(),
+                    grade: String(item.grade).trim(),
+                    title: String(item.title).trim(),
+                    journal: String(item.journal || '待定').trim(),
+                    time: String(item.time || '待定').trim(),
+                    status: item.status,
+                    progress: Math.max(0, Math.min(1, Number(item.progress)))
+                }));
+            } catch (error) {
+                console.warn('无法读取浏览器数据，将使用初始数据。', error);
+                return defaultThesisData.map(item => ({ ...item }));
+            }
+        }
+
+        function isValidPaper(item) {
+            return item && typeof item === 'object' &&
+                typeof item.name === 'string' && item.name.trim() &&
+                typeof item.grade === 'string' && item.grade.trim() &&
+                typeof item.title === 'string' && item.title.trim() &&
+                allowedStatuses.includes(item.status) &&
+                Number.isFinite(Number(item.progress));
+        }
+
+        let thesisData = loadStoredData();
+
+        function persistData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(thesisData));
+                localStorage.setItem(UPDATED_KEY, new Date().toISOString());
+                updateLastUpdateDate();
+                return true;
+            } catch (error) {
+                showNotification('浏览器禁止保存数据，请检查隐私或存储设置', 'info');
+                console.error(error);
+                return false;
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"]/g, character => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+            })[character]);
+        }
+
         // 当前编辑的行索引和字段
         let editingRow = -1;
         let editingField = '';
@@ -869,25 +964,27 @@
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
             
-            data.forEach((item, index) => {
+            data.forEach(item => {
+                const index = thesisData.indexOf(item);
                 const row = document.createElement('tr');
                 const progressPercent = Math.round(item.progress * 100);
+                row.setAttribute('data-index', index);
                 
                 row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td><span class="grade-tag grade-${item.grade}">${item.grade}</span></td>
+                    <td>${escapeHtml(item.name)}</td>
+                    <td><span class="grade-tag grade-${escapeHtml(item.grade)}">${escapeHtml(item.grade)}</span></td>
                     <td class="title-cell">
-                        <div class="editable" data-index="${index}" data-field="title">${item.title}</div>
+                        <div class="editable" data-index="${index}" data-field="title">${escapeHtml(item.title)}</div>
                     </td>
                     <td class="journal-cell">
-                        <div class="editable" data-index="${index}" data-field="journal">${item.journal || '暂未定'}</div>
+                        <div class="editable" data-index="${index}" data-field="journal">${escapeHtml(item.journal || '暂未定')}</div>
                     </td>
                     <td>
-                        <div class="editable" data-index="${index}" data-field="time">${item.time}</div>
+                        <div class="editable" data-index="${index}" data-field="time">${escapeHtml(item.time)}</div>
                     </td>
                     <td>
-                        <div class="status-badge status-${item.status}" data-index="${index}" data-field="status">
-                            ${item.status}
+                        <div class="status-badge status-${escapeHtml(item.status)}" data-index="${index}" data-field="status">
+                            ${escapeHtml(item.status)}
                         </div>
                     </td>
                     <td class="progress-cell">
@@ -914,7 +1011,7 @@
             });
             
             // 更新统计信息
-            updateStats(data);
+            updateStats(thesisData);
             
             // 添加编辑事件监听器
             addEditListeners();
@@ -1034,7 +1131,7 @@
             input.focus();
             
             // 添加保存和取消按钮
-            const actionsCell = document.querySelector(`tr:nth-child(${index+1}) td:last-child`);
+            const actionsCell = document.querySelector(`#tableBody tr[data-index="${index}"] td:last-child`);
             actionsCell.innerHTML = `
                 <div class="actions">
                     <button class="action-btn save-btn" onclick="saveEdit()">
@@ -1090,7 +1187,7 @@
             select.focus();
             
             // 添加保存和取消按钮
-            const actionsCell = document.querySelector(`tr:nth-child(${index+1}) td:last-child`);
+            const actionsCell = document.querySelector(`#tableBody tr[data-index="${index}"] td:last-child`);
             actionsCell.innerHTML = `
                 <div class="actions">
                     <button class="action-btn save-btn" onclick="saveEdit()">
@@ -1155,7 +1252,7 @@
             element.parentNode.appendChild(container);
             
             // 添加保存和取消按钮
-            const actionsCell = document.querySelector(`tr:nth-child(${index+1}) td:last-child`);
+            const actionsCell = document.querySelector(`#tableBody tr[data-index="${index}"] td:last-child`);
             actionsCell.innerHTML = `
                 <div class="actions">
                     <button class="action-btn save-btn" onclick="saveEdit()">
@@ -1183,7 +1280,7 @@
             editingRow = index;
             
             // 获取当前行的所有单元格
-            const row = document.querySelector(`#tableBody tr:nth-child(${index+1})`);
+            const row = document.querySelector(`#tableBody tr[data-index="${index}"]`);
             const titleCell = row.querySelector('.title-cell');
             const journalCell = row.querySelector('.journal-cell');
             const timeCell = row.querySelector('td:nth-child(5)');
@@ -1285,7 +1382,7 @@
         function saveEdit() {
             if (editingRow === -1) return;
             
-            const row = document.querySelector(`#tableBody tr:nth-child(${editingRow+1})`);
+            const row = document.querySelector(`#tableBody tr[data-index="${editingRow}"]`);
             
             // 如果是整行编辑模式
             const titleInput = row.querySelector('.title-cell input');
@@ -1331,7 +1428,9 @@
             editingField = '';
             
             // 显示保存成功提示
-            showNotification('修改已保存', 'success');
+            persistData();
+            updateStats(thesisData);
+            showNotification('修改已保存在当前浏览器', 'success');
             updateLastUpdateDate();
         }
         
@@ -1350,8 +1449,9 @@
         function deleteRow(index) {
             if (confirm(`确定要删除 ${thesisData[index].name} 的论文 "${thesisData[index].title}" 吗？`)) {
                 thesisData.splice(index, 1);
+                persistData();
                 renderTable(thesisData);
-                showNotification('论文已删除', 'success');
+                showNotification('论文已删除并保存在当前浏览器', 'success');
                 updateLastUpdateDate();
             }
         }
@@ -1359,24 +1459,24 @@
         // 渲染单行
         function renderTableRow(index) {
             const item = thesisData[index];
-            const row = document.querySelector(`#tableBody tr:nth-child(${index+1})`);
+            const row = document.querySelector(`#tableBody tr[data-index="${index}"]`);
             const progressPercent = Math.round(item.progress * 100);
             
             row.innerHTML = `
-                <td>${item.name}</td>
-                <td><span class="grade-tag grade-${item.grade}">${item.grade}</span></td>
+                <td>${escapeHtml(item.name)}</td>
+                <td><span class="grade-tag grade-${escapeHtml(item.grade)}">${escapeHtml(item.grade)}</span></td>
                 <td class="title-cell">
-                    <div class="editable" data-index="${index}" data-field="title">${item.title}</div>
+                    <div class="editable" data-index="${index}" data-field="title">${escapeHtml(item.title)}</div>
                 </td>
                 <td class="journal-cell">
-                    <div class="editable" data-index="${index}" data-field="journal">${item.journal || '暂未定'}</div>
+                    <div class="editable" data-index="${index}" data-field="journal">${escapeHtml(item.journal || '暂未定')}</div>
                 </td>
                 <td>
-                    <div class="editable" data-index="${index}" data-field="time">${item.time}</div>
+                    <div class="editable" data-index="${index}" data-field="time">${escapeHtml(item.time)}</div>
                 </td>
                 <td>
-                    <div class="status-badge status-${item.status}" data-index="${index}" data-field="status">
-                        ${item.status}
+                    <div class="status-badge status-${escapeHtml(item.status)}" data-index="${index}" data-field="status">
+                        ${escapeHtml(item.status)}
                     </div>
                 </td>
                 <td class="progress-cell">
@@ -1464,7 +1564,13 @@
         
         // 更新最后更新日期
         function updateLastUpdateDate() {
-            const now = new Date();
+            let now = new Date('2026-09-12T00:00:00+08:00');
+            try {
+                const storedDate = localStorage.getItem(UPDATED_KEY);
+                if (storedDate) now = new Date(storedDate);
+            } catch (error) {
+                console.warn('无法读取更新时间', error);
+            }
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
@@ -1563,6 +1669,7 @@
                 
                 // 添加到数据数组
                 thesisData.push(newPaper);
+                persistData();
                 
                 // 关闭模态框
                 addModal.style.display = 'none';
@@ -1572,19 +1679,85 @@
                 renderTable(thesisData);
                 
                 // 显示成功消息
-                showNotification(`成功添加 ${newPaper.name} 的新论文`, 'success');
+                showNotification(`成功添加 ${newPaper.name} 的新论文，已保存在当前浏览器`, 'success');
                 updateLastUpdateDate();
             });
         }
+
+        // 数据导出与导入，便于在不同设备之间手动传递最新数据
+        function setupDataTools() {
+            const exportButton = document.getElementById('exportDataBtn');
+            const importButton = document.getElementById('importDataBtn');
+            const fileInput = document.getElementById('importDataFile');
+
+            exportButton.addEventListener('click', function() {
+                const blob = new Blob([JSON.stringify(thesisData, null, 2)], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const date = new Date().toISOString().slice(0, 10);
+                link.href = url;
+                link.download = `论文进度数据-${date}.json`;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+                showNotification('数据备份已导出', 'success');
+            });
+
+            importButton.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files && fileInput.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function() {
+                    try {
+                        const parsed = JSON.parse(String(reader.result));
+                        if (!Array.isArray(parsed) || parsed.length === 0 || !parsed.every(isValidPaper)) {
+                            throw new Error('请选择由本系统导出的有效 JSON 文件');
+                        }
+                        if (!confirm(`导入文件包含 ${parsed.length} 篇论文，将替换当前浏览器中的数据，是否继续？`)) return;
+                        thesisData = parsed.map(item => ({
+                            name: String(item.name).trim(),
+                            grade: String(item.grade).trim(),
+                            title: String(item.title).trim(),
+                            journal: String(item.journal || '待定').trim(),
+                            time: String(item.time || '待定').trim(),
+                            status: item.status,
+                            progress: Math.max(0, Math.min(1, Number(item.progress)))
+                        }));
+                        persistData();
+                        renderTable(thesisData);
+                        showNotification('数据导入成功', 'success');
+                    } catch (error) {
+                        showNotification(error instanceof Error ? error.message : '导入失败', 'info');
+                    } finally {
+                        fileInput.value = '';
+                    }
+                };
+                reader.readAsText(file, 'utf-8');
+            });
+        }
+
+        // 同一网站在其他标签页修改数据后自动刷新当前页面
+        window.addEventListener('storage', function(event) {
+            if (event.key !== STORAGE_KEY) return;
+            thesisData = loadStoredData();
+            renderTable(thesisData);
+            updateLastUpdateDate();
+            showNotification('已同步另一个标签页中的修改', 'success');
+        });
         
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
             renderTable(thesisData);
             setupFilters();
             setupAddNewFeature();
+            setupDataTools();
             updateLastUpdateDate();
         });
     </script>
 </body>
 </html>
-
